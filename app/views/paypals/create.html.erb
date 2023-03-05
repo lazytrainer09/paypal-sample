@@ -1,2 +1,38 @@
 <h1>Paypals#create</h1>
-<p>Find me in app/views/paypals/create.html.erb</p>
+
+<script src="https://www.paypal.com/sdk/js?client-id=<%= ENV["CLIENT_ID"]%> &locale=ja_JP&currency=JPY&disable-funding=card&intent=capture"> // Replace YOUR_SB_CLIENT_ID with your sandbox client ID
+</script>
+
+<div id="paypal-button-container"></div>
+
+<script>
+  paypal.Buttons({
+
+    createOrder: function() {
+    return fetch('/my-server/create-paypal-transaction', {
+        method: 'post',
+        headers: {
+        'content-type': 'application/json'
+        }
+    }).then(function(res) {
+        return res.json();
+    }).then(function(data) {
+        return data.orderID; // Use the same key name for order ID on the client and server
+    });
+    },
+    onApprove: function(data) {
+    return fetch('/my-server/capture-paypal-transaction', {
+        headers: {
+        'content-type': 'application/json'
+        },
+        body: JSON.stringify({
+        orderID: data.orderID
+        })
+    }).then(function(res) {
+        return res.json();
+    }).then(function(details) {
+        alert('Transaction funds captured from ' + details.payer_given_name);
+    })
+    }
+  }).render('#paypal-button-container'); // Display payment options on your web page
+</script>
