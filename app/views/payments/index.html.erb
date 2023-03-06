@@ -1,15 +1,16 @@
-<h1>Paypals#create</h1>
+<h1>Payments#index</h1>
 
-<script src="https://www.paypal.com/sdk/js?client-id=<%= ENV["CLIENT_ID"]%> &locale=ja_JP&currency=JPY&disable-funding=card&intent=capture"> // Replace YOUR_SB_CLIENT_ID with your sandbox client ID
+<script src="https://www.paypal.com/sdk/js?client-id=<%= ENV["CLIENT_ID"]%>&locale=ja_JP&currency=JPY&disable-funding=card&intent=capture"> // Replace YOUR_SB_CLIENT_ID with your sandbox client ID
 </script>
 
+<h1><%= @sample %></h1>
 <div id="paypal-button-container"></div>
 
 <script>
   paypal.Buttons({
 
     createOrder: function() {
-    return fetch('/my-server/create-paypal-transaction', {
+    return fetch('/payments', {
         method: 'post',
         headers: {
         'content-type': 'application/json'
