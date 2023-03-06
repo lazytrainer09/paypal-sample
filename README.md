@@ -1,24 +1,8 @@
-# README
+# paypal-sample
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This app is paypal sample appliation by Ruby.
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+This app calls the following paypal apis.
+- /v2/checkout/order
+- /v2/checkout/orders/#{order_id}/capture
+- /v1/oauth2/token
