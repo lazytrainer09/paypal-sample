@@ -1,6 +1,7 @@
-version: '3'
+version: "3"
 services:
   app:
+    container_name: pay-app
     build: .
     command: /bin/bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
     volumes:
@@ -14,6 +15,7 @@ services:
     stdin_open: true
     tty: true
   db:
+    container_name: pay-db
     image: mysql:8.0
     ports:
       - "3306:3306"

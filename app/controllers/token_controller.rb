@@ -6,7 +6,6 @@ class TokenController < ApplicationController
   require 'uri'
 
   def create
-    # Define your client ID and secret
     client_id = ENV['CLIENT_ID']
     client_secret = ENV['CLIENT_SECRET']
 

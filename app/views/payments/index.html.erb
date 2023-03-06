@@ -22,17 +22,18 @@
     });
     },
     onApprove: function(data) {
-    return fetch('/my-server/capture-paypal-transaction', {
+    return fetch(`/payments/${data.orderID}/capture`, {
+        method: 'post',
         headers: {
         'content-type': 'application/json'
         },
         body: JSON.stringify({
-        orderID: data.orderID
+          orderID: data.orderID
         })
     }).then(function(res) {
         return res.json();
     }).then(function(details) {
-        alert('Transaction funds captured from ' + details.payer_given_name);
+        alert('Status: '+ details.status);
     })
     }
   }).render('#paypal-button-container'); // Display payment options on your web page
